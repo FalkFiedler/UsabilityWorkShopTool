@@ -35,4 +35,4 @@ jobs:
           docker push ${{ env.IMAGE }}
 
       - name: Show image URL
-        run: echo "Image pushed: ${{ env.IMAGE }}"
+        run: echo "Image pushed:" ${{ env.IMAGE }}
