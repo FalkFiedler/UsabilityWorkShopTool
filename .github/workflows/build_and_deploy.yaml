@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}/data-reader:latest
+  IMAGE: ghcr.io/${{ toLower(github.repository) }}/data-reader:latest
 
 jobs:
   build-and-push:
