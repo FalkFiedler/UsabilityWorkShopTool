@@ -1,0 +1,19 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: ServingTemplate
+metadata:
+  name: data-reader
+spec:
+  template:
+    spec:
+      containers:
+        - name: data-reader
+          image: <your-image-url>
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: dataset
+              mountPath: /mnt/data
+      volumes:
+        - name: dataset
+          dataset:
+            name: <your-dataset-name>
