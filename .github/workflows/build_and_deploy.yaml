@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
 
+env:
+  IMAGE: ghcr.io/${{ github.repository }}/data-reader:latest
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -25,13 +28,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/data-reader:latest
-          docker build -t $IMAGE .
+          docker build -t ${{ env.IMAGE }} .
 
       - name: Push Docker image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/data-reader:latest
-          docker push $IMAGE
+          docker push ${{ env.IMAGE }}
 
       - name: Show image URL
-        run: echo "Image pushed: ghcr.io/${{ github.repository }}/data-reader:latest"
+        run: echo "Image pushed: ${{ env.IMAGE }}"
