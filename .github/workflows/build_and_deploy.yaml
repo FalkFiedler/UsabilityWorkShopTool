@@ -4,9 +4,6 @@ on:
   push:
     branches: ["main"]
 
-env:
-  IMAGE: ghcr.io/${{ toLower(github.repository) }}/data-reader:latest
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -18,6 +15,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up environment
+        id: setup
+        run: |
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE=ghcr.io/${REPO_LOWER}/data-reader:latest" >> $GITHUB_ENV
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
